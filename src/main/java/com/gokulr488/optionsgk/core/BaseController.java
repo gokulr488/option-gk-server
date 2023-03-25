@@ -9,8 +9,8 @@ public class BaseController {
 	
 	public static final Logger logger = LoggerFactory.getLogger(BaseController.class);
 	
-	@ExceptionHandler({ MisException.class })
-	public ErrorResponse misExceptionHandler(MisException e) {
+	@ExceptionHandler({ OgkException.class })
+	public ErrorResponse misExceptionHandler(OgkException e) {
 		ErrorResponse resp = new ErrorResponse();
 		resp.setStatusCode(500);
 		resp.setErrorMessage(e.getError().getErrorMessage());

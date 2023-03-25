@@ -1,14 +1,14 @@
 package com.gokulr488.optionsgk.core;
 
-public class MisError {
+public class AppError {
 	private String errorMessage;
 	private String errorDescription;
 
-	public MisError(String errorMessage) {
+	public AppError(String errorMessage) {
 		this.errorMessage = errorMessage;
 	}
 
-	public MisError(String errorMessage, String errorDescription) {
+	public AppError(String errorMessage, String errorDescription) {
 		this.errorMessage = errorMessage;
 		this.errorDescription = errorDescription;
 	}
