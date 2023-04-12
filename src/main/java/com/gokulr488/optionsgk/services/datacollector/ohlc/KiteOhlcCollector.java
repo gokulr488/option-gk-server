@@ -26,5 +26,4 @@ public class KiteOhlcCollector implements OhlcCollector {
 		cache.setUserId(req.getUserId());
 		return new BaseResp(200, "Auth set succesfully", true);
 	}
-
 }
