@@ -6,5 +6,7 @@ public class Constants {
 	public static final int START_PAGE = 1;
 	public static final String ASC = "ASC";
 	public static final String DESC = "DESC";
-	public static final long IST_TIME_DIFFERNCE =19800000;
+	public static final long IST_TIME_DIFFERNCE = 19800000;
+
+	public static final String CONFIG_FILE = "config.txt";
 }
