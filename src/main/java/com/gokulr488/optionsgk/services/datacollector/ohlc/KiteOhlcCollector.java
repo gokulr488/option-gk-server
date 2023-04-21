@@ -2,6 +2,8 @@ package com.gokulr488.optionsgk.services.datacollector.ohlc;
 
 import java.util.HashMap;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.gokulr488.optionsgk.core.BaseResp;
+import com.gokulr488.optionsgk.core.Config;
 import com.gokulr488.optionsgk.core.OgkException;
 import com.gokulr488.optionsgk.services.CacheService;
 import com.gokulr488.optionsgk.services.datacollector.ohlc.pojo.KiteAuthReq;
@@ -20,6 +23,8 @@ import com.gokulr488.optionsgk.services.datacollector.ohlc.pojo.kitegraph.KiteGr
 
 @Service
 public class KiteOhlcCollector implements OhlcCollector {
+
+	private final Logger log = LoggerFactory.getLogger(KiteOhlcCollector.class);
 
 	@Autowired
 	private CacheService cache;
@@ -43,7 +48,7 @@ public class KiteOhlcCollector implements OhlcCollector {
 					+ req.getToDate();
 
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("authorization", cache.getKiteAuthToken());
+			headers.set("authorization", cache.getConfig(Config.KITE_AUTH_TOKEN));
 			headers.set("Cookie", "_cfuvid=7K07iJIBX2HlwMPjjKAnOdciwqdGstXfKOZGYZKQ7K0-1681314266602-0-604800000");
 			ResponseEntity<KiteGraphResp> response = rest.exchange(url, HttpMethod.GET, new HttpEntity<>(headers),
 					KiteGraphResp.class, new HashMap<>());
@@ -55,8 +60,8 @@ public class KiteOhlcCollector implements OhlcCollector {
 
 	@Override
 	public BaseResp setKiteAuth(KiteAuthReq req) {
-		cache.setKiteAuthToken(req.getAuthorizationKey());
-		cache.setUserId(req.getUserId());
+		cache.setConfig(Config.KITE_AUTH_TOKEN, req.getAuthorizationKey());
+		cache.setConfig(Config.KITE_USER_ID, req.getUserId());
 		return new BaseResp(200, "Auth set succesfully", true);
 	}
 }

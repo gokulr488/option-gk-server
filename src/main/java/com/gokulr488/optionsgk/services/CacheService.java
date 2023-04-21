@@ -2,26 +2,18 @@ package com.gokulr488.optionsgk.services;
 
 import org.springframework.stereotype.Service;
 
+import com.gokulr488.optionsgk.core.Config;
+
 @Service
 public class CacheService {
+	private Config config = new Config();
 
-	private String kiteAuthToken;
-	private String userId;
-
-	public void setKiteAuthToken(String kiteAuthToken) {
-		this.kiteAuthToken = kiteAuthToken;
+	public String getConfig(String key) {
+		return config.getConfig(key);
 	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
-	public String getKiteAuthToken() {
-		return kiteAuthToken;
-	}
-
-	public String getUserId() {
-		return userId;
+	
+	public void setConfig(String key,String value) {
+		config.setConfig(key, value);
 	}
 
 }
